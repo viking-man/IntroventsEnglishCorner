@@ -12,7 +12,9 @@ A spoken English education chatbot based on ChatGPT/whsiper and qTTS.
 ->返回文本通过qtts转化成音频文件，数据落库，返回音频响应  
 ->前端直接播放音频文件
 
-## 使用流程
+## 使用流程  
+python版本需要为3.10  
+
 1. 下载程序
 ```
 git clone https://github.com/viking-man/IntroventsEnglishCorner.git
