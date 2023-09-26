@@ -1,0 +1,141 @@
+@font-face {
+    font-family: "ColfaxAI";
+    src: url(https://cdn.openai.com/API/fonts/ColfaxAIRegular.woff2) format("woff2"),
+    url(https://cdn.openai.com/API/fonts/ColfaxAIRegular.woff) format("woff");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "ColfaxAI";
+    src: url(https://cdn.openai.com/API/fonts/ColfaxAIBold.woff2) format("woff2"),
+    url(https://cdn.openai.com/API/fonts/ColfaxAIBold.woff) format("woff");
+    font-weight: bold;
+    font-style: normal;
+}
+
+body,
+input {
+    font-size: 16px;
+    line-height: 24px;
+    color: #353740;
+    font-family: "ColfaxAI", Helvetica, sans-serif;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
+
+.icon {
+    width: 256px;
+}
+
+h3 {
+    font-size: 32px;
+    line-height: 40px;
+    font-weight: bold;
+    color: #202123;
+    margin: 16px 0 40px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    width: 320px;
+}
+
+input[type="text"] {
+    padding: 12px 16px;
+    border: 1px solid #10a37f;
+    border-radius: 4px;
+    margin-bottom: 24px;
+}
+
+::placeholder {
+    color: #8e8ea0;
+    opacity: 1;
+}
+
+input[type="submit"] {
+    padding: 12px 0;
+    color: #fff;
+    background-color: #10a37f;
+    border: none;
+    border-radius: 4px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.result {
+    font-weight: bold;
+    margin-top: 40px;
+}
+
+#chatBox {
+    width: 80%;
+    height: 300px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+    overflow-y: auto;
+}
+
+/* 蓝色按钮 */
+.blue-button {
+    background-color: #3498db; /* 蓝色背景 */
+    color: #fff; /* 字体颜色为白色 */
+    padding: 10px 20px; /* 设置内边距 */
+    border: none; /* 去除边框 */
+    border-radius: 5px; /* 圆角边框 */
+    cursor: pointer; /* 鼠标样式为手型 */
+}
+
+.blue-button:hover {
+    background-color: #2980b9; /* 鼠标悬停时的背景色 */
+}
+
+/* 红色按钮 */
+.red-button {
+    background-color: #e74c3c; /* 红色背景 */
+    color: #fff; /* 字体颜色为白色 */
+    padding: 10px 20px; /* 设置内边距 */
+    border: none; /* 去除边框 */
+    border-radius: 5px; /* 圆角边框 */
+    cursor: pointer; /* 鼠标样式为手型 */
+}
+
+.red-button:hover {
+    background-color: #c0392b; /* 鼠标悬停时的背景色 */
+}
+
+/* 匹配按钮样式的文本区域 */
+.question-textarea {
+    padding: 10px 20px; /* 设置内边距 */
+    border: 2px solid #3498db; /* 蓝色边框 */
+    border-radius: 5px; /* 圆角边框 */
+    background-color: white; /* 设置背景为白色 */
+    color: black; /* 字体颜色为黑色 */
+    font-size: 16px; /* 可根据需要调整字体大小 */
+    width: 80%; /* 100%宽度，占据一行 */
+    height: 40px; /* 可根据需要调整高度 */
+    resize: none; /* 禁止用户调整文本区域大小 */
+    display: block; /* 单独占据一行 */
+    margin: 10px; /* 居中显示 */
+}
+
+/* 鼠标悬停时的样式 */
+.question-textarea:hover {
+    /* 添加透明度变化效果 */
+    transition: background-color 0.3s ease;
+    background-color: rgba(52, 152, 219, 0.3); /* 鼠标悬停时的背景色透明度 */
+}
+
+#audioPlayer {
+    display: none;
+}
+
+

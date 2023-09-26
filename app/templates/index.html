@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<head>
+    <title>Introvents' English Corner</title>
+    <link
+            rel="shortcut icon"
+            href="{{ url_for('static', filename='robot.png') }}"
+    />
+    <link rel="stylesheet" href="{{ url_for('static', filename='main2.css') }}"/>
+</head>
+
+<body>
+<img src="{{ url_for('static', filename='robot2.png') }}" class="icon"/>
+<h3>Introvents' English Corner</h3>
+
+<div>
+    <div id="chatBox"></div>
+    <textarea id="userMessage" class="question-textarea" placeholder="Ask me a question"></textarea>
+    <div>
+        <label for="gptVersion">Choose GPT Version:</label>
+        <select id="gptVersion" name="gptVersion">
+            <option value="GPT3" selected>GPT3</option>
+            <option value="GPT4">GPT4</option>
+        </select>
+    </div>
+    <button onclick="sendMessage()" class="blue-button">Text Chat</button>
+    <button id="recordButton" class="blue-button" onclick="toggleRecording()">Start audio</button>
+    <button id="clearButton" class="red-button" onclick="clearHistory()">Clear History</button>
+    &nbsp;
+    <audio id="audioPlayer" controls>
+        Your browser does not support the audio element.
+    </audio>
+</div>
+
+<script>
+
+    let chatId = "";
+    let chatHistory = "";
+    const User = "User"
+    const AI = "AI"
+    //真实环境通过用户系统获取
+    const userId = "jdh082312382992"
+
+    function displayMessage(role, message) {
+        const chatBox = document.getElementById('chatBox');
+        chatBox.innerHTML += `<p>${role}: ${message}</p>`;
+        chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    function sendMessage() {
+        const userMessage = document.getElementById('userMessage').value;
+        const gptVersion = document.getElementById('gptVersion').value;
+        if (userMessage.trim() !== '') {
+            displayMessage(User, userMessage);
+            document.getElementById('userMessage').value = '';
+
+            fetch('/text_chat', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: new URLSearchParams({
+                    user_id: userId,
+                    user_message: userMessage,
+                    chat_id: chatId,
+                    gpt_version: gptVersion
+                })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    chatHistory = data.chat_history;
+                    chatId = data.chat_id
+                    displayMessage(AI, data.ai_message);
+                    fetchAudioFile(data.audio_id);
+                });
+        }
+    }
+
+    let mediaRecorder;
+    let isRecording = false;
+
+    function toggleRecording() {
+        if (!isRecording) {
+            startRecording();
+            document.getElementById('recordButton').textContent = 'End audio';
+        } else {
+            stopRecording();
+            document.getElementById('recordButton').textContent = 'Start audio';
+        }
+        isRecording = !isRecording;
+    }
+
+    function startRecording() {
+        navigator.mediaDevices.getUserMedia({audio: true})
+            .then(stream => {
+                mediaRecorder = new MediaRecorder(stream);
+                const chunks = [];
+
+                mediaRecorder.ondataavailable = event => {
+                    if (event.data.size > 0) {
+                        chunks.push(event.data);
+                    }
+                };
+
+                mediaRecorder.onstop = () => {
+                    const audioBlob = new Blob(chunks, {type: 'audio/wav'});
+                    const audioUrl = URL.createObjectURL(audioBlob);
+                    console.log('Audio URL:', audioUrl);
+                    {#const chatBoxDiv = document.getElementById('chatBox');#}
+                    {#chatBoxDiv.innerHTML = `<audio controls src="${audioUrl}"></audio>`;#}
+                };
+
+                mediaRecorder.start();
+            })
+            .catch(error => {
+                console.error('Error accessing microphone:', error);
+            });
+    }
+
+    function stopRecording() {
+        const gptVersion = document.getElementById('gptVersion').value;
+        if (mediaRecorder && mediaRecorder.state === 'recording') {
+            mediaRecorder.stop();
+
+            //音频
+            mediaRecorder.ondataavailable = event => {
+                if (event.data.size > 0) {
+                    const formData = new FormData();
+                    formData.append('user_id', userId);
+                    formData.append('audio', event.data, 'audio.wav');  // 'audio.wav' is the file name
+                    formData.append('chat_id', chatId);
+                    formData.append('gpt_version', gptVersion);
+                    sendAudio(formData);
+                }
+            };
+        }
+    }
+
+    function sendAudio(formData) {
+        fetch('/speech_chat', {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data)
+                {#const chatBoxDiv = document.getElementById('chatBox');#}
+                {#chatBoxDiv.innerHTML = `<p>Transcription: ${data.transcription}</p>`;#}
+                chatHistory = data.chat_history
+                chatId = data.chat_id
+                displayMessage(User, data.user_message)
+                displayMessage(AI, data.ai_message)
+
+                fetchAudioFile(data.audio_id);
+            })
+            .catch(error => {
+                console.error('Error uploading audio:', error);
+            });
+    }
+
+    function fetchAudioFile(audioId) {
+        fetch('/get_audio', {
+            method: 'POST',
+            body: new URLSearchParams({user_id: userId, chat_id: chatId, audio_id: audioId})
+        })
+            .then(response => response.blob())
+            .then(blob => {
+                const audioUrl = URL.createObjectURL(blob);
+                const audioPlayer = document.getElementById('audioPlayer');
+                audioPlayer.src = audioUrl;
+                audioPlayer.play();
+                {#audioPlayer.style.display = 'none';#}
+            })
+            .catch(error => {
+                console.error('Error fetching audio file:', error);
+            });
+    }
+
+    function clearHistory() {
+        chatHistory = ""
+        chatId = ""
+        // 发起 AJAX 请求向后台发送清除历史记录的请求
+        const xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    // 清除成功，可以根据需要执行其他操作
+                    console.log('History cleared successfully');
+                    const chatBox = document.getElementById('chatBox');
+                    chatBox.innerHTML = ''; // 将这一行移动到这里
+                } else {
+                    // 清除失败，可以根据需要执行其他操作
+                    console.error('Failed to clear history');
+                }
+            }
+        };
+        xhr.open('POST', '/clear_history', true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        // 在这里发送JSON主体包含userId
+        xhr.send(JSON.stringify({userId: userId}));
+        // 删除这一行：xhr.send();
+    }
+
+
+    window.onload = function () {
+        chatHistory = ""
+        chatId = ""
+
+        fetch('/clear_history')
+            .then(response => response.json())
+            .then(data => {
+                // 你可以在此处处理响应数据
+                const chatBox = document.getElementById('chatBox');
+                chatBox.innerHTML = '';
+                console.log(data);
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+            });
+    };
+
+</script>
+</body>

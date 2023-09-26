@@ -1,0 +1,91 @@
+/* 基础设置 */
+body, input, textarea, button, select {
+    font-size: 16px;
+    line-height: 24px;
+    color: #353740;
+    font-family: "ColfaxAI", Helvetica, sans-serif;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 60px;
+    padding-bottom: 60px;
+    background-color: #f4f4f4;
+}
+
+/* 标题与图标 */
+.icon {
+    width: 256px;
+}
+
+h3 {
+    font-size: 32px;
+    line-height: 40px;
+    font-weight: bold;
+    color: #202123;
+    margin: 16px 0 40px;
+}
+
+/* 聊天框 */
+#chatBox {
+    width: 80%;
+    height: 300px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #fff;
+    overflow-y: auto;
+    border-radius: 5px;
+}
+
+/* 文本框 & 按钮基础 */
+textarea, button {
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin: 10px;
+    border: 2px solid #3498db;
+    cursor: pointer;
+}
+
+textarea {
+    width: 80%;
+    height: 60px;
+    resize: none;
+    background-color: #fff;
+    color: #353740;
+}
+
+/* 按钮样式 */
+.blue-button, .red-button {
+    font-weight: bold;
+    text-align: center;
+    width: 150px;
+}
+
+.blue-button {
+    background-color: #3498db;
+    color: #fff;
+}
+
+.blue-button:hover {
+    background-color: #2980b9;
+}
+
+.red-button {
+    background-color: #e74c3c;
+    color: #fff;
+}
+
+.red-button:hover {
+    background-color: #c0392b;
+}
+
+/* 其他组件 */
+#audioPlayer {
+    margin-top: 20px;
+    width: 80%;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
