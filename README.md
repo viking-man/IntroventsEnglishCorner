@@ -1,3 +1,4 @@
+## [English Doc](english_doc.md)
 # IntroventsEnglishCorner
 A spoken English education chatbot based on ChatGPT/whsiper and qTTS.
 
