@@ -39,9 +39,11 @@ cd IntroventsEnglishCorner
    flask db upgrade
    ```
 5. 运行启动
+   
    `flask run`
 
 6. 网页打开环境运行地址
+   
    `127.0.0.1:5000`
 
 ## 注意事项
