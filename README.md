@@ -1,3 +1,4 @@
+## [English Doc](english_doc.md)
 # IntroventsEnglishCorner
 A spoken English education chatbot based on ChatGPT/whsiper and qTTS.
 
@@ -38,7 +39,14 @@ cd IntroventsEnglishCorner
    flask db upgrade
    ```
 5. 运行启动
+   
+
    `flask run`
+
+6. 网页打开环境运行地址
+   
+
+   `127.0.0.1:5000`
 
 ## 注意事项
 1. .flaskenv中的OPENAI_API_KEY需要换成你自己的openai_api_key
