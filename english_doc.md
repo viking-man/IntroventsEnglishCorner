@@ -49,6 +49,10 @@ flask db upgrade
 5. Start the application   
 `flask run`
 
+6. Open the website
+
+    `127.0.0.1:5000`
+
 ### 4. Notes  
 
 - Replace the OPENAI_API_KEY in .flaskenv with your own OpenAI API key.
