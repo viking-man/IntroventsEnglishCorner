@@ -11,7 +11,8 @@ from pathlib import Path
 def convert_to_audio(user_id, chat_id, text_content, lang):
     # 定时任务清理
     tts = gTTS(text_content, lang=lang)
-    audio_filename = os.path.join("app/files/output", user_id + "_" + chat_id + "_" + str(int(time.time())) + ".wav")
+    audio_filename = str(Path("app/files/output",
+                              user_id + "_" + chat_id + "_" + str(int(time.time())) + ".wav").absolute())
     tts.save(audio_filename)
 
     with open(audio_filename, 'rb') as f:
