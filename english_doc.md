@@ -36,7 +36,7 @@ cd IntroventsEnglishCorner
 python -m venv venv
 . venv/bin/activate
 ```
-   For Windows users, after creating a virtual environment using python -m venv venv, navigate to the Scripts directory by using the command cd venv/Scripts/. Then, activate the created virtual environment directly using the activate command.
+   For Windows users, after creating a virtual environment using `python -m venv venv`, navigate to the Scripts directory by using the command `cd venv/Scripts/`. Then, activate the created virtual environment directly using the `activate` command.
 
 3. Install the necessary Python packages
 
