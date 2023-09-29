@@ -40,7 +40,7 @@ def escape_windows_path(path):
 
 def deal_windows_path(path):
     if is_windows():
-        path = "r'" + path + "'"
+        path = path
     return path
 
 
