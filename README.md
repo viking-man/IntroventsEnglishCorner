@@ -24,11 +24,14 @@ python版本需要为3.10
 git clone https://github.com/viking-man/IntroventsEnglishCorner.git
 cd IntroventsEnglishCorner
 ```
-2. 初始化项目环境  
+2. 初始化项目虚拟环境  
 ```
   python -m venv venv
   . venv/bin/activate
 ```
+
+windows用户在使用`python -m venv venv`创建虚拟环境后，通过命令`cd venv/Scripts/`到Scripts目录，直接使用activate命令激活创建的虚拟环境
+
 3. 安装对应python包
 
    `pip install -r requirements.txt`
