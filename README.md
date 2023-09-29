@@ -30,7 +30,7 @@ cd IntroventsEnglishCorner
   . venv/bin/activate
 ```
 
-windows用户在使用`python -m venv venv`创建虚拟环境后，通过命令`cd venv/Scripts/`到Scripts目录，直接使用activate命令激活创建的虚拟环境
+    windows用户在使用`python -m venv venv`创建虚拟环境后，通过命令`cd venv/Scripts/`到Scripts目录，直接使用activate命令激活创建的虚拟环境
 
 3. 安装对应python包
 
