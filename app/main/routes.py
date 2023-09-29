@@ -68,7 +68,6 @@ def speech_chat():
     # Save the audio file (optional)
     audio_path = str(
         Path("app/files/input", user_id + "_" + chat_id + "_" + str(time.time()) + ".wav").absolute())
-    audio_path = qtts_proxy.deal_windows_path(audio_path)
     audio_file.save(audio_path)
 
     chat_text = whisper_proxy.transcribe_to_text(audio_path)
