@@ -2,7 +2,6 @@ import os.path
 
 from flask import Flask, render_template, request, jsonify, send_file
 from app.open_ai import chatgpt_proxy
-from app.tts import qtts_proxy
 from app.models import Audio
 from app.open_ai import whisper_proxy
 from app.main import bp

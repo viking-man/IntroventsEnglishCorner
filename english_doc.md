@@ -1,6 +1,6 @@
 # Introvents' English Corner
 
-#### A spoken English education chatbot based on ChatGPT/whsiper and qTTS.
+#### A spoken English education chatbot based on ChatGPT/whsiper and gTTS.
 
 ### 1.Introduction
 
