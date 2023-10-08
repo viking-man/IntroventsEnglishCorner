@@ -1,9 +1,9 @@
 ## [English Doc](english_doc.md)
 # IntroventsEnglishCorner
-A spoken English education chatbot based on ChatGPT/whsiper and qTTS.
+A spoken English education chatbot based on ChatGPT/whsiper and gTTS.
 
 # 社恐人士的英语角
-#### 程序采用flask框架，数据库用了sqlite来存储音频文件，音频->文本使用openai的开源whsiper，文本->音频使用qTTS，聊天对话使用chatGPT的官方API。所以使用本项目需要有chatgpt账号的api授权。  
+#### 程序采用flask框架，数据库用了sqlite来存储音频文件，音频->文本使用openai的开源whsiper，文本->音频使用gTTS，聊天对话使用chatGPT的官方API。所以使用本项目需要有chatgpt账号的api授权。  
 
   
 #### 介绍视频：https://www.bilibili.com/video/BV15w411m75j/?vd_source=7dc010c6db2003327fcc3177974e71f7
@@ -13,7 +13,7 @@ A spoken English education chatbot based on ChatGPT/whsiper and qTTS.
 ->flask服务端  
 ->whsiper转化成文本  
 ->请求openai的ChatCompetition接口  
-->返回文本通过qtts转化成音频文件，数据落库，返回音频响应  
+->返回文本通过gtts转化成音频文件，数据落库，返回音频响应  
 ->前端直接播放音频文件
 
 ## 使用流程  
