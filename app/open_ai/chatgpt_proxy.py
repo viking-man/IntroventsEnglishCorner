@@ -3,9 +3,11 @@ from app.type import ChatGPTModel
 from app.models import Chat, Audio
 import logging
 
-import openai
 from app import db
 import json
+
+from openai import OpenAI
+client = OpenAI(api_key="your api key")
 
 
 def text_chat(user_message, user_id, chat_id, gpt_version):
@@ -44,7 +46,7 @@ def requestOpenai(chat_context, chat_history, model):
     chat_history.append({"role": "user",
                          "content": chat_context})
     print(f'openai chat request->{chat_history}')
-    response = openai.ChatCompletion.create(
+    response = client.chat.completions.create(
         model=model,
         messages=chat_history,
         temperature=0
