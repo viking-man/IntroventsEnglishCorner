@@ -53,6 +53,7 @@ windows用户在使用`python -m venv venv`创建虚拟环境后，通过命令`
 
 ## 注意事项
 1. .flaskenv中的OPENAI_API_KEY需要换成你自己的openai_api_key
-2. whsiper第一次使用会默认下载small的模型，大概500M，需要等待；如果觉得转换效果不好，可以到WhisperModel.py文件中将small换成medium或者large
+2. chatgpt_proxy中需要填写你自己的openai_api_key
+3. whsiper第一次使用会默认下载small的模型，大概500M，需要等待；如果觉得转换效果不好，可以到WhisperModel.py文件中将small换成medium或者large
 
 
