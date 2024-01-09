@@ -7,8 +7,14 @@ from app import db
 import json
 
 from openai import OpenAI
-client = OpenAI(api_key="your api key")
+import os
+from dotenv import load_dotenv
 
+# 加载环境变量
+load_dotenv('../../.flaskenv',override=True)
+# 获取环境变量
+OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
+client = OpenAI(api_key=OPENAI_API_KEY)
 
 def text_chat(user_message, user_id, chat_id, gpt_version):
     gpt_model = ChatGPTModel.get_value(gpt_version)
